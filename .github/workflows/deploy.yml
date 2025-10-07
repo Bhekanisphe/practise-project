@@ -11,9 +11,9 @@ jobs:
               with:
                   node-version: '14'
             - name: Install dependencies
-              run: nmp ci
+              run: npm ci
             - name: run lints
-              run: nmp lint
+              run: npm lint
         
 
     test:
@@ -27,9 +27,9 @@ jobs:
               with:
                   node-version: '14'
             - name: Install dependencies
-              run: nmp ci
+              run: npm ci
             - name: Run tests  
-              run: nmp test
+              run: npm test
               
     deploy:
         runs-on: windows-latest
@@ -42,6 +42,6 @@ jobs:
               with:
                 node-version: '14'
             - name: Install dependencies
-              run: nmp ci
+              run: npm ci
             - name: build project
-              run: nmp run build
+              run: npm run build
