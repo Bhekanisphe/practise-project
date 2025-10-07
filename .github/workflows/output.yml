@@ -1,0 +1,8 @@
+name : output
+on: issue_comment
+jobs:
+    output:
+        runs-on: windows-latest
+        steps:
+            - name : output message
+              run: echo "${{ github.event.comment.body }}}"

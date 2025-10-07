@@ -1,0 +1,47 @@
+name: deploy 
+on: push
+jobs:
+    lint:
+        runs-on: windows-latest
+        steps:
+            - name : Checkout repository
+              uses: actions/checkout@v3
+            - name: Set up Node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '14'
+            - name: Install dependencies
+              run: nmp ci
+            - name: run lints
+              run: nmp lint
+        
+
+    test:
+        runs-on: windows-latest
+        needs: lint
+        steps:
+            - name : Checkout repository
+              uses: actions/checkout@v3
+            - name: Set up Node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '14'
+            - name: Install dependencies
+              run: nmp ci
+            - name: Run tests  
+              run: nmp test
+              
+    deploy:
+        runs-on: windows-latest
+        needs: test
+        steps:
+            - name : get code
+              uses: actions/checkout@v3
+            - name: install node
+              uses: actions/setup-node@v3
+              with:
+                node-version: '14'
+            - name: Install dependencies
+              run: nmp ci
+            - name: build project
+              run: nmp run build
